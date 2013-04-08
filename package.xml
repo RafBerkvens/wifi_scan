@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>wifi_scan</name>
+  <version>0.0.1</version>
+  <description>The wifi_scan package scans for RSSI values of visible APs</description>
+  
+  <maintainer email="rafael.berkvens@ua.ac.be">Rafael Berkvens</maintainer>
+  <license>BSD</license>
+  <url type="website">http://projects.e-lab.be/projects/bioslam-wifi</url>
+  <url type="repository">http://projects.e-lab.be/projects/bioslam-wifi/repository</url>
+  <author email="rafael.berkvens@ua.ac.be">Rafael Berkvens</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>rospy</run_depend>
+</package>
