@@ -9,7 +9,7 @@ from wifi_scan.msg import rssi
 def packet_handler(pkt):
   if pkt.haslayer(Dot11):
     if pkt.type == 0 and pkt.subtype == 8 :
-      print "%s" %pkt.addr2
+      print "%s, %s" %(pkt.addr2, -(256-ord(pkt.notdecoded[-4:-3])))
       return (pkt.addr2, -(256-ord(pkt.notdecoded[-4:-3])))
 
 def wifi_scan():
@@ -17,7 +17,10 @@ def wifi_scan():
   rospy.init_node('wifi_scan')
   while not rospy.is_shutdown():
     packet_list = sniff(iface = "mon0", count = 1) # contains only one element
-    (address, rssi_v) = packet_handler(packet_list[0])
+    try:
+      (address, rssi_v) = packet_handler(packet_list[0])
+    except TypeError, te:
+      print '>> not iterable'
 
 if __name__ == '__main__':
   try:
