@@ -1,4 +1,4 @@
 Header header
 
 string address
-string rssi
+int32 rssi
