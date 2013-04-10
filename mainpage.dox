@@ -5,11 +5,11 @@
 \b wifi_scan is a wireless Ethernet scanning driver. Currently, only the
 ability to report the RSSI of visible AP's is implemented.
 
-In addition to providing an overview of your package,
+<!-- In addition to providing an overview of your package,
 this is the section where the specification and design/architecture 
 should be detailed. While the original specification may be done on the
 wiki, it should be transferred here once your package starts to take shape.
-You can then link to this documentation page from the Wiki.
+You can then link to this documentation page from the Wiki. -->
 
 
 \section codeapi Code API
