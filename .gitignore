@@ -148,3 +148,5 @@ bin/
 lib/
 msg_gen/
 srv_gen/
+doc/
+rosdoc_lite/
