@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  <copyright holder> <email>
+    The WifiScan class allows WiFi scans using iwlib.h.
+    Copyright (C) 2013  Rafael Berkvens rafael.berkvens@ua.ac.be
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

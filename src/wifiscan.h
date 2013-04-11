@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) 2013  <copyright holder> <email>
+    The WifiScan class allows WiFi scans using iwlib.h.
+    Copyright (C) 2013  Rafael Berkvens rafael.berkvens@ua.ac.be
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@
 #define WIFISCAN_ERROR_IN_IW_SCAN -2
 
 /**
- * @brief The wifi_scan base class.
+ * @brief The wifi_scan main class.
  * 
  * The WifiScan class allows for easy operations on the iwlib library, and easy
  * publishing to the defined topics.
@@ -46,9 +46,27 @@ class WifiScan
   std::string interface_;
 
 public:
+  /**
+   * @name Constructors and destructor.
+   **/
+  ///@{
+  /**
+   * @brief Default constructor.
+   *
+   * @param interface The Ethernet interface to scan. Defaults to "wlan0".
+   **/
   WifiScan(std::string interface = "wlan0");
+  /**
+   * @brief Destructor
+   *
+   **/  
   virtual ~WifiScan();
+  ///@}
 
+  /**
+   * @name ROS operations. 
+   **/
+  ///@{
   /**
    * @brief Publishes a Fingerprint message to the Publisher pub.
    * 
@@ -65,6 +83,7 @@ public:
    * @throw WIFISCAN_ERROR_IN_IW_SCAN Error in iw_scan(). 
    **/
   void createFingerprint(ros::Publisher *pub);
+  ///@}
 };
 
 #endif // WIFISCAN_H

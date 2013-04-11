@@ -29,71 +29,25 @@
 
 #include "wifiscan.h"
 
-/** Main function to set up ROS node.
- */
+/**
+ * @brief Create a ROS node that publishes fingerprints.
+ *
+ * This is the main function to set up the ROS node.
+ **/
 int main(int argc, char **argv)
 {
-  // Set up ROS.
+  /* Set up ROS, get handle, create publisher, set desired rate. */
   ros::init(argc, argv, "fingerprint");
   ros::NodeHandle node;
-
   ros::Publisher pub_fingerprint = node.advertise<wifi_scan::Fingerprint>
                                    ("wifi_fp", 10);
   ros::Rate rate(1);
 
+  /* Create scanning object and start fingerprinting. */
   WifiScan wifiscan;
   while(node.ok())
   {
     wifiscan.createFingerprint(&pub_fingerprint);
-//     int sockfd;
-//     wireless_scan_head scan_context;
-// 
-//     if((sockfd = iw_sockets_open()) < 0)
-//     {
-//       ROS_ERROR("Error opening ioctl socket");
-//       return 0;
-//     }
-//     int we_kernel_version = iw_get_kernel_we_version();
-// 
-//     if(iw_scan(sockfd, "wlan0", we_kernel_version, &scan_context) < 0)
-//     {
-//       ROS_ERROR("Error in iw_scan()");
-//       return 0;
-//     }
-// 
-//     iw_sockets_close(sockfd);
-// 
-//     for(wireless_scan *i = scan_context.result; i != 0; i = i->next)
-//     {
-//       double dBm;
-//       if(i->stats.qual.updated & IW_QUAL_DBM)
-//       {
-//         dBm = i->stats.qual.level;
-//         if(i->stats.qual.level >= 64)
-//           dBm -= 0x100;
-//       }
-//       else if(i->stats.qual.updated & IW_QUAL_RCPI)
-//       {
-//         dBm = (i->stats.qual.level / 2.0) - 110.0;
-//       }
-// 
-//       char address[128];
-//       snprintf(address, 128, "%02x:%02x:%02x:%02x:%02x:%02x"
-//                , (unsigned char)i->ap_addr.sa_data[0]
-//                , (unsigned char)i->ap_addr.sa_data[1]
-//                , (unsigned char)i->ap_addr.sa_data[2]
-//                , (unsigned char)i->ap_addr.sa_data[3]
-//                , (unsigned char)i->ap_addr.sa_data[4]
-//                , (unsigned char)i->ap_addr.sa_data[5]);
-//       char strength[32];
-//       snprintf(strength, 32, "%g", dBm);
-// 
-// //       wifi_scan::Fingerprint rssi;
-// //       rssi.header.stamp = ros::Time::now();
-// //       rssi.list = address;
-// //       rssi.list = atoi(strength);
-// //       pub_fingerprint.publish(rssi);
-//     }
     ros::spinOnce();
     rate.sleep();
   }

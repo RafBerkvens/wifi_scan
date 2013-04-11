@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>wifi_scan</name>
-  <version>0.0.2</version>
+  <version>0.1.0</version>
   <description>The wifi_scan package scans for RSSI values of visible APs</description>
   
   <maintainer email="rafael.berkvens@ua.ac.be">Rafael Berkvens</maintainer>

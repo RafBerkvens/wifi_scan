@@ -3,7 +3,8 @@
 \htmlinclude manifest.html
 
 \b wifi_scan is a wireless Ethernet scanning driver. Currently, only the
-ability to report the RSSI of visible AP's is implemented.
+ability to report the received signal strength indication (RSSI) of visible 
+access points (APs) is implemented.
 
 <!-- In addition to providing an overview of your package,
 this is the section where the specification and design/architecture 
@@ -14,7 +15,11 @@ You can then link to this documentation page from the Wiki. -->
 
 \section codeapi Code API
 
-Provide links to specific auto-generated API documentation within your
+The wifi_scan code API consists for now out of the WifiScan class. It
+implements following methods:
+- WifiScan::createFingerprint(ros::Publisher *pub)
+
+<!-- Provide links to specific auto-generated API documentation within your
 package that is of particular interest to a reader. Doxygen will
 document pretty much every part of your code, so do your best here to
 point the reader to the actual API.
@@ -24,21 +29,20 @@ should use the doxygen 'group' tag to keep these APIs together. For
 example, the roscpp documentation has 'libros' and 'botherder' groups
 so that those can be viewed separately. The rospy documentation
 similarly has a 'client-api' group that pulls together APIs for a
-Client API page.
+Client API page. -->
 
 
 \section rosapi ROS API
 
-Every ROS name in your code must be documented. Names are very
+<!-- Every ROS name in your code must be documented. Names are very
 important in ROS because they are the API to nodes and services. They
 are also capable of being remapped on the command-line, so it is VERY
 IMPORTANT THAT YOU LIST NAMES AS THEY APPEAR IN THE CODE. It is also
 important that you write your code so that the names can be easily
-remapped.
+remapped. -->
 
 List of nodes:
 - \b fingerprint
-- \b node_name2
 
 
 <!-- START: copy for each node -->
