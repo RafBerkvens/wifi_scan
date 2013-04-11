@@ -20,6 +20,7 @@
 #ifndef WIFISCAN_H
 #define WIFISCAN_H
 
+#include <cstdio>
 #include <string>
 #include <map>
 
@@ -35,11 +36,9 @@
 
 /**
  * @brief The wifi_scan main class.
- * 
+ *
  * The WifiScan class allows for easy operations on the iwlib library, and easy
  * publishing to the defined topics.
- * 
- * @todo Configuration.
  **/
 class WifiScan
 {
@@ -47,7 +46,7 @@ class WifiScan
 
 public:
   /**
-   * @name Constructors and destructor.
+   * @name 01. Constructors and destructor
    **/
   ///@{
   /**
@@ -59,28 +58,48 @@ public:
   /**
    * @brief Destructor
    *
-   **/  
+   **/
   virtual ~WifiScan();
   ///@}
 
   /**
-   * @name ROS operations. 
+   * @name 02. Configuration
+   **/
+  ///@{
+  /**
+   * @brief Get the interface on which scans are performed.
+   *
+   * @return The interface as std::string.
+   **/
+  std::string interface() const { return interface_; }
+  /**
+   * @brief Set the interface to perform scans on.
+   *
+   * @param interface An std::string that corresponds to a live Ethernet
+   * interface.
+   * @return void
+   **/
+  void set_interface(std::string interface) { this->interface_ = interface; }
+  ///@}
+
+  /**
+   * @name 03. ROS operations
    **/
   ///@{
   /**
    * @brief Publishes a Fingerprint message to the Publisher pub.
-   * 
+   *
    * A fingerprint is a list of all visible WiFi access points' device addresses
-   * linked with their corresponding received signal strength indication. 
+   * linked with their corresponding received signal strength indication.
    *
    * @param pub A ROS Publisher, publishing wifi_scan::Fingerprint messages.
-   * Example: ros::Publisher pub = node.advertise<wifi_scan::Fingerprint> 
+   * Example: ros::Publisher pub = node.advertise<wifi_scan::Fingerprint>
    * ("wifi_fp", 10);
-   * 
+   *
    * @return void
-   * 
+   *
    * @throw WIFISCAN_ERROR_OPENING_IOCTL_SOCKET Error opening ioctl socket.
-   * @throw WIFISCAN_ERROR_IN_IW_SCAN Error in iw_scan(). 
+   * @throw WIFISCAN_ERROR_IN_IW_SCAN Error in iw_scan().
    **/
   void createFingerprint(ros::Publisher *pub);
   ///@}

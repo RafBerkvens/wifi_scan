@@ -15,21 +15,13 @@ You can then link to this documentation page from the Wiki. -->
 
 \section codeapi Code API
 
-The wifi_scan code API consists for now out of the WifiScan class. It
+The wifi_scan code API is built so that there are no ROS debug messages being
+cast internally. All exceptions will be thrown, usually as an integer. For
+possible exceptions, see the method documentation. 
+
+The API consists for now out of the WifiScan class. It
 implements following methods:
 - WifiScan::createFingerprint(ros::Publisher *pub)
-
-<!-- Provide links to specific auto-generated API documentation within your
-package that is of particular interest to a reader. Doxygen will
-document pretty much every part of your code, so do your best here to
-point the reader to the actual API.
-
-If your codebase is fairly large or has different sets of APIs, you
-should use the doxygen 'group' tag to keep these APIs together. For
-example, the roscpp documentation has 'libros' and 'botherder' groups
-so that those can be viewed separately. The rospy documentation
-similarly has a 'client-api' group that pulls together APIs for a
-Client API page. -->
 
 
 \section rosapi ROS API
@@ -55,63 +47,30 @@ fingerprint publishes a RSSI message to the /wifi_fp topic.
 
 \subsubsection Usage
 \verbatim
-$ node_type1 [standard ROS args]
+$ rosrun wifi_scan fingerprint [standard ROS args]
 \endverbatim
 
 \par Example
 
 \verbatim
-$ node_type1
+$ rosrun wifi_scan fingerprint wifi_fp:=my_topic
 \endverbatim
 
 
 \subsubsection topics ROS topics
 
-Subscribes to:
-- \b "in": [std_msgs/FooType] description of in
-
 Publishes to:
-- \b "wifi_fp": [RSSI] description of wifi_fp
+- \b "wifi_fp": [Fingerprint] List of unique [AddressRSSI] messages. This is
+a pair of device address as string and RSSI as float64. 
 
 \subsubsection parameters ROS parameters
 
-Reads the following parameters from the parameter server
+Reads the following parameters from the command line
 
-- \b "~param_name" : \b [type] description of param_name
-- \b "~my_param" : \b [string] description of my_param
+- \b "~topic" : \b [string] Set the topic to a different value. Equal to
+default ROS renaming capabilities, but less ambiguous. Defaults to "wifi_fp".
+- \b "~interface" : \b [string] Set the Ethernet interface to scan. Defaults to
+"wlan0". 
 
-Sets the following parameters on the parameter server
-
-- \b "~param_name" : \b [type] description of param_name
-
-
-\subsubsection services ROS services
-- \b "foo_service": [std_srvs/FooType] description of foo_service
-
-
-<!-- END: copy for each node -->
-
-\section commandline Command-line tools
-
-This section is a catch-all for any additional tools that your package
-provides or uses that may be of use to the reader. For example:
-
-- tools/scripts (e.g. rospack, roscd)
-- roslaunch .launch files
-- xmlparam files
-
-\subsection script_name script_name
-
-Description of what this script/file does.
-
-\subsubsection Usage
-\verbatim
-$ ./script_name [args]
-\endverbatim
-
-\par Example
-
-\verbatim
-$ ./script_name foo bar
-\endverbatim
 */
+ 
