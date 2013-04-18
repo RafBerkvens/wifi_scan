@@ -1,0 +1,20 @@
+authors: Rafael Berkvens <rafael.berkvens@ua.ac.be>
+brief: ''
+bugtracker: ''
+depends:
+- catkin
+- roscpp
+- message_runtime
+- std_msgs
+- rospy
+- message_generation
+description: The wifi_scan package scans for RSSI values of visible APs
+license: GPLv3
+maintainers: Rafael Berkvens <rafael.berkvens@ua.ac.be>
+msgs:
+- Fingerprint
+- AddressRSSI
+package_type: package
+repo_url: http://projects.e-lab.be/projects/bioslam-wifi/repository
+srvs: []
+url: http://projects.e-lab.be/projects/bioslam-wifi

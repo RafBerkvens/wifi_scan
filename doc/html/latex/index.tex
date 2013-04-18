@@ -1,0 +1,41 @@
+
+
+{\bfseries wifi\-\_\-scan} is a wireless \-Ethernet scanning driver. \-Currently, only the ability to report the received signal strength indication (\-R\-S\-S\-I) of visible access points (\-A\-Ps) is implemented.\section{\-Code A\-P\-I}\label{index_codeapi}
+\-The wifi\-\_\-scan code \-A\-P\-I is built so that there are no \-R\-O\-S debug messages being cast internally. \-All exceptions will be thrown, usually as an integer. \-For possible exceptions, see the method documentation.
+
+\-The \-A\-P\-I consists for now out of the \doxyref{\-Wifi\-Scan}{p.}{classWifiScan} class. \-It implements following methods\-:
+\begin{DoxyItemize}
+\item \doxyref{\-Wifi\-Scan\-::create\-Fingerprint(ros\-::\-Publisher $\ast$pub)}{p.}{classWifiScan_a4232f9f50651eb7fbbb53eebdee48021}
+\end{DoxyItemize}\section{\-R\-O\-S A\-P\-I}\label{index_rosapi}
+\-List of nodes\-:
+\begin{DoxyItemize}
+\item {\bfseries fingerprint} 
+\end{DoxyItemize}
+
+
+
+\subsection{fingerprint}\label{index_fingerprint}
+fingerprint publishes a \-R\-S\-S\-I message to the /wifi\-\_\-fp topic.\subsubsection{\-Usage}\label{index_Usage}
+\begin{DoxyVerb}
+$ rosrun wifi_scan fingerprint [standard ROS args]
+\end{DoxyVerb}
+
+
+\begin{DoxyParagraph}{\-Example}
+
+\end{DoxyParagraph}
+\begin{DoxyVerb}
+$ rosrun wifi_scan fingerprint wifi_fp:=my_topic
+\end{DoxyVerb}
+\subsubsection{\-R\-O\-S topics}\label{index_topics}
+\-Publishes to\-:
+\begin{DoxyItemize}
+\item {\bfseries \char`\"{}wifi\-\_\-fp\char`\"{}}\-: [\-Fingerprint] \-List of unique [\-Address\-R\-S\-S\-I] messages. \-This is a pair of device address as string and \-R\-S\-S\-I as float64.
+\end{DoxyItemize}\subsubsection{\-R\-O\-S parameters}\label{index_parameters}
+\-Reads the following parameters from the command line
+
+
+\begin{DoxyItemize}
+\item {\bfseries \char`\"{}$\sim$topic\char`\"{}} \-: {\bfseries }[string] \-Set the topic to a different value. \-Equal to default \-R\-O\-S renaming capabilities, but less ambiguous. \-Defaults to \char`\"{}wifi\-\_\-fp\char`\"{}.
+\item {\bfseries \char`\"{}$\sim$interface\char`\"{}} \-: {\bfseries }[string] \-Set the \-Ethernet interface to scan. \-Defaults to \char`\"{}wlan0\char`\"{}. 
+\end{DoxyItemize}
