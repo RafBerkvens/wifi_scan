@@ -32,15 +32,18 @@ WifiScan::~WifiScan()
 void WifiScan::createFingerprint(ros::Publisher *pub)
 {
   /* Create socket, perform scan, close socket. */
-  int sockfd;
+  int sockfd; /* socket to the kernel */
   if((sockfd = iw_sockets_open()) < 0)
     throw WIFISCAN_ERROR_OPENING_IOCTL_SOCKET;
   wireless_scan_head scan_context;
   int kernel_version = iw_get_kernel_we_version();
   char *interface = new char[interface_.length() + 1];
   std::strcpy(interface, interface_.c_str());
+  ROS_DEBUG_STREAM("uid: " << geteuid());
   if(iw_scan(sockfd, interface, kernel_version, &scan_context) < 0)
     throw WIFISCAN_ERROR_IN_IW_SCAN;
+  if(scan_context.result != 0)
+    ROS_DEBUG_STREAM("Fingerprint collected, publishing...");
   iw_sockets_close(sockfd);
 
   /* Loop over result, build fingerprint. */
@@ -49,7 +52,7 @@ void WifiScan::createFingerprint(ros::Publisher *pub)
   {
     /* Retrieve device address*/
     char address[128];
-    snprintf(address, 128, "%02x:%02x:%02x:%02x:%02x:%02x"
+    snprintf(address, 128, "%02X%02X%02X%02X%02X%02X"
              , (unsigned char)i->ap_addr.sa_data[0]
              , (unsigned char)i->ap_addr.sa_data[1]
              , (unsigned char)i->ap_addr.sa_data[2]
@@ -76,12 +79,13 @@ void WifiScan::createFingerprint(ros::Publisher *pub)
                                std::string(address), dBm));
     if(ret.second == false)
     {
-      // Nothing added. Normal behaviour. Check here if necessary.
+      ROS_WARN_STREAM("Address not unique.");
     }
   }
 
   /* Create fingerprint message, publish message. */
   wifi_scan::Fingerprint fingerprint_message;
+  fingerprint_message.list.clear();
   for(std::map<std::string, double>::iterator it = fingerprint.begin();
       it != fingerprint.end();
       it++)
@@ -89,6 +93,7 @@ void WifiScan::createFingerprint(ros::Publisher *pub)
     wifi_scan::AddressRSSI address_rssi;
     address_rssi.address = it->first;
     address_rssi.rssi = it->second;
+    ROS_DEBUG_STREAM(it->first << ", " << it->second);
     fingerprint_message.list.push_back(address_rssi);
   }
   fingerprint_message.header.stamp = ros::Time::now();

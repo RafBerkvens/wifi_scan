@@ -80,34 +80,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00028"></a>00028 
 <a name="l00029"></a>00029 <span class="preprocessor">#include &lt;ros/ros.h&gt;</span>
 <a name="l00030"></a>00030 <span class="preprocessor">#include &lt;ros/time.h&gt;</span>
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="preprocessor">#include &lt;wifi_scan/Fingerprint.h&gt;</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="wifiscan_8h.html#ad1376d39aed25fbecc291d0d7dbad5f5">00034</a> <span class="preprocessor">#define WIFISCAN_ERROR_OPENING_IOCTL_SOCKET -1</span>
-<a name="l00035"></a><a class="code" href="wifiscan_8h.html#a8ebfcf2ba8950fcab6d1e323f5017392">00035</a> <span class="preprocessor"></span><span class="preprocessor">#define WIFISCAN_ERROR_IN_IW_SCAN -2</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>
-<a name="l00043"></a><a class="code" href="classWifiScan.html">00043</a> <span class="keyword">class </span><a class="code" href="classWifiScan.html" title="The wifi_scan main class.">WifiScan</a>
-<a name="l00044"></a>00044 {
-<a name="l00045"></a><a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">00045</a>   std::string <a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">interface_</a>;
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="keyword">public</span>:
-<a name="l00051"></a>00051 
+<a name="l00031"></a>00031 <span class="preprocessor">#include &lt;ros/console.h&gt;</span>
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="preprocessor">#include &lt;wifi_scan/Fingerprint.h&gt;</span>
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="wifiscan_8h.html#ad1376d39aed25fbecc291d0d7dbad5f5">00035</a> <span class="preprocessor">#define WIFISCAN_ERROR_OPENING_IOCTL_SOCKET -1</span>
+<a name="l00036"></a><a class="code" href="wifiscan_8h.html#a8ebfcf2ba8950fcab6d1e323f5017392">00036</a> <span class="preprocessor"></span><span class="preprocessor">#define WIFISCAN_ERROR_IN_IW_SCAN -2</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span>
+<a name="l00044"></a><a class="code" href="classWifiScan.html">00044</a> <span class="keyword">class </span><a class="code" href="classWifiScan.html" title="The wifi_scan main class.">WifiScan</a>
+<a name="l00045"></a>00045 {
+<a name="l00046"></a><a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">00046</a>   std::string <a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">interface_</a>;
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 <span class="keyword">public</span>:
 <a name="l00052"></a>00052 
-<a name="l00057"></a>00057   <a class="code" href="classWifiScan.html#ae2f428da3fd5a40d584a9b1ddeb7f7a6" title="Default constructor.">WifiScan</a>(std::string <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a> = <span class="stringliteral">&quot;wlan0&quot;</span>);
-<a name="l00062"></a>00062   <span class="keyword">virtual</span> <a class="code" href="classWifiScan.html#adb6f0a117e023c829c51088bbb6895c1" title="Destructor.">~WifiScan</a>();
-<a name="l00064"></a>00064 
-<a name="l00068"></a>00068 
+<a name="l00053"></a>00053 
+<a name="l00058"></a>00058   <a class="code" href="classWifiScan.html#ae2f428da3fd5a40d584a9b1ddeb7f7a6" title="Default constructor.">WifiScan</a>(std::string <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a> = <span class="stringliteral">&quot;wlan0&quot;</span>);
+<a name="l00063"></a>00063   <span class="keyword">virtual</span> <a class="code" href="classWifiScan.html#adb6f0a117e023c829c51088bbb6895c1" title="Destructor.">~WifiScan</a>();
+<a name="l00065"></a>00065 
 <a name="l00069"></a>00069 
-<a name="l00074"></a><a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376">00074</a>   std::string <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">interface_</a>; }
-<a name="l00082"></a><a class="code" href="classWifiScan.html#ac970248d5aa43eb2e7cfee37655d55e4">00082</a>   <span class="keywordtype">void</span> <a class="code" href="classWifiScan.html#ac970248d5aa43eb2e7cfee37655d55e4" title="Set the interface to perform scans on.">set_interface</a>(std::string <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a>) { this-&gt;<a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">interface_</a> = <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a>; }
-<a name="l00084"></a>00084 
-<a name="l00088"></a>00088 
+<a name="l00070"></a>00070 
+<a name="l00075"></a><a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376">00075</a>   std::string <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">interface_</a>; }
+<a name="l00083"></a><a class="code" href="classWifiScan.html#ac970248d5aa43eb2e7cfee37655d55e4">00083</a>   <span class="keywordtype">void</span> <a class="code" href="classWifiScan.html#ac970248d5aa43eb2e7cfee37655d55e4" title="Set the interface to perform scans on.">set_interface</a>(std::string <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a>) { this-&gt;<a class="code" href="classWifiScan.html#a3acfa2145c2e269f7c1e674d3efca4ed">interface_</a> = <a class="code" href="classWifiScan.html#ac1d9ff96f5f92fb9e5093345753c5376" title="Get the interface on which scans are performed.">interface</a>; }
+<a name="l00085"></a>00085 
 <a name="l00089"></a>00089 
-<a name="l00104"></a>00104   <span class="keywordtype">void</span> <a class="code" href="classWifiScan.html#a4232f9f50651eb7fbbb53eebdee48021" title="Publishes a Fingerprint message to the Publisher pub.">createFingerprint</a>(ros::Publisher *pub);
-<a name="l00106"></a>00106 };
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108 <span class="preprocessor">#endif // WIFISCAN_H</span>
-<a name="l00109"></a>00109 <span class="preprocessor"></span><span class="comment">// kate: indent-mode cstyle; indent-width 2; replace-tabs on; </span>
+<a name="l00090"></a>00090 
+<a name="l00105"></a>00105   <span class="keywordtype">void</span> <a class="code" href="classWifiScan.html#a4232f9f50651eb7fbbb53eebdee48021" title="Publishes a Fingerprint message to the Publisher pub.">createFingerprint</a>(ros::Publisher *pub);
+<a name="l00107"></a>00107 };
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 <span class="preprocessor">#endif // WIFISCAN_H</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="comment">// kate: indent-mode cstyle; indent-width 2; replace-tabs on; </span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -128,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <hr size="1"><div style="align: right;">
 <a href="http://ros.org/wiki/wifi_scan">wifi_scan</a><br />
 Author(s): Rafael Berkvens <rafael.berkvens@ua.ac.be></br />
-<small>autogenerated on Thu Apr 18 2013 09:29:03</small>
+<small>autogenerated on Fri Apr 26 2013 14:03:22</small>
 </div>
 </body>
 </html>

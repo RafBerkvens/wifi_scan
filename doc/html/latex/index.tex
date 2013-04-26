@@ -15,7 +15,14 @@
 
 
 \subsection{fingerprint}\label{index_fingerprint}
-fingerprint publishes a \-R\-S\-S\-I message to the /wifi\-\_\-fp topic.\subsubsection{\-Usage}\label{index_Usage}
+fingerprint publishes a \-R\-S\-S\-I message to the /wifi\-\_\-fp topic.\subsubsection{}\label{_}
+\-Since the \-Ethernet interfaces are root restricted, root privileges are necessary to perform valid scans. \-To allow root privileges, follow these steps\-:
+
+\-After compilation, the executable must have its ownership and group changed to root\-:root. \-It is assumed that compilation is done with `catkin`, from the `catkin` project folder. \-Compiled source is assumed to be in the `devel' directory of the working directory. \begin{DoxyVerb}
+sudo chown root:root devel/lib/wifi_scan/fingerprint
+sudo chmod a+s /devel/lib/wifi_scan/fingerprint
+\end{DoxyVerb}
+\subsubsection{\-Usage}\label{index_Usage}
 \begin{DoxyVerb}
 $ rosrun wifi_scan fingerprint [standard ROS args]
 \end{DoxyVerb}

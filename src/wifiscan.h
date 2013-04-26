@@ -28,6 +28,7 @@
 
 #include <ros/ros.h>
 #include <ros/time.h>
+#include <ros/console.h>
 
 #include <wifi_scan/Fingerprint.h>
 

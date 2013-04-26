@@ -37,14 +37,14 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "fingerprint");
   ros::NodeHandle node;
   ros::Rate rate(1);
-  
+
   /* Get parameters from command line. */
   ros::NodeHandle private_node_handle_("~");
   std::string topic_name;
   private_node_handle_.param<std::string>("topic", topic_name, "wifi_fp");
   std::string interface;
   private_node_handle_.param<std::string>("interface", interface, "wlan0");
-  
+
   /* Create topic, scanning object, and start fingerprinting. */
   ros::Publisher pub_fingerprint = node.advertise<wifi_scan::Fingerprint>
                                    (topic_name, 10);
@@ -54,7 +54,6 @@ int main(int argc, char **argv)
     try
     {
       wifiscan.createFingerprint(&pub_fingerprint);
-      ROS_DEBUG_STREAM("Fingerprint performed.");
     }
     catch(int exception)
     {
