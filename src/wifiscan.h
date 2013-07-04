@@ -23,6 +23,8 @@
 #include <cstdio>
 #include <string>
 #include <map>
+#include <string>
+#include <vector>
 
 #include <iwlib.h>
 
@@ -44,6 +46,13 @@
 class WifiScan
 {
   std::string interface_;
+
+  struct DeviceAddressCompare
+  {
+    bool operator() (const std::string &lhs, const std::string &rhs) const;
+  };
+
+  double MeanRSSI(const std::vector<double> &RSSIValues);
 
 public:
   /**

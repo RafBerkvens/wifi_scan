@@ -33,48 +33,51 @@
  *
  * This is the main function to set up the ROS node.
  **/
-int main(int argc, char **argv) {
-	/* Set up ROS, get handle, set desired rate. */
-	ros::init(argc, argv, "fingerprint");
-	ros::NodeHandle node;
-	ros::Rate rate(1);
+int main(int argc, char **argv)
+{
+  /* Set up ROS, get handle, set desired rate. */
+  ros::init(argc, argv, "fingerprint");
+  ros::NodeHandle node;
+  ros::Rate rate(1);
 
-	/* Get parameters from command line. */
-	ros::NodeHandle private_node_handle_("~");
-	std::string topic_name;
-	private_node_handle_.param < std::string > ("topic", topic_name, "wifi_fp");
-	std::string interface;
-	private_node_handle_.param < std::string
-			> ("interface", interface, "wlan0");
+  /* Get parameters from command line. */
+  ros::NodeHandle private_node_handle_("~");
+  std::string topic_name;
+  private_node_handle_.param<std::string>("topic", topic_name, "wifi_fp");
+  std::string interface;
+  private_node_handle_.param<std::string>("interface", interface, "wlan0");
 
-	/* Create topic, scanning object, and start fingerprinting. */
-	ros::Publisher pub_fingerprint = node.advertise < wifi_scan::Fingerprint
-			> (topic_name, 10);
-	WifiScan wifiscan(interface);
-	while (node.ok()) {
-		try {
-			wifiscan.createFingerprint(&pub_fingerprint);
-		} catch (int exception) {
-			switch (exception) {
-			case WIFISCAN_ERROR_OPENING_IOCTL_SOCKET:
-				ROS_ERROR_STREAM(
-						"Error in WifiScan::createFingerprint:\n"
-								<< "  Error opening ioctl socket.");
-				break;
-			case WIFISCAN_ERROR_IN_IW_SCAN:
-				ROS_ERROR_STREAM(
-						"Error in WifiScan::createFingerprint:\n"
-								<< "  Error in iw_scan(). Might be wrong interface.");
-				break;
-			default:
-				ROS_ERROR_STREAM(
-						"Error in WifiScan::createFingerprint:\n"
-								<< "  Unknown error.");
-			}
-		}
-		ros::spinOnce();
-		rate.sleep();
-	}
+  /* Create topic, scanning object, and start fingerprinting. */
+  ros::Publisher pub_fingerprint = node.advertise<wifi_scan::Fingerprint>(
+      topic_name, 10);
+  WifiScan wifiscan(interface);
+  while (node.ok())
+  {
+    try
+    {
+      wifiscan.createFingerprint(&pub_fingerprint);
+    }
+    catch (int exception)
+    {
+      switch (exception)
+      {
+        case WIFISCAN_ERROR_OPENING_IOCTL_SOCKET:
+          ROS_ERROR_STREAM("Error in WifiScan::createFingerprint:\n"
+                           << "  Error opening ioctl socket.");
+          break;
+        case WIFISCAN_ERROR_IN_IW_SCAN:
+          ROS_ERROR_STREAM(
+              "Error in WifiScan::createFingerprint:\n"
+              << "  Error in iw_scan(). Might be wrong interface.");
+          break;
+        default:
+          ROS_ERROR_STREAM("Error in WifiScan::createFingerprint:\n"
+                           << "  Unknown error.");
+      }
+    }
+    ros::spinOnce();
+    rate.sleep();
+  }
 }
 
 // kate: indent-mode cstyle; indent-width 2; replace-tabs on; 
