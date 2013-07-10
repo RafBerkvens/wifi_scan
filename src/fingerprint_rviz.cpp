@@ -132,17 +132,19 @@ void FingerprintRviz::fingerprint_rvizCallback(
       access_point != fingerprint_.end();
       access_point++, index_++)
   {
+    ROS_DEBUG_STREAM("device mac address: " << access_point->first);
+
     marker_.id = index_;
     marker_.pose.position.z = (access_point->second + 100) / 10;
 
     unsigned int colorr, colorg, colorb;
-    hexstream_ << access_point->first[6] << access_point->first[7];
+    hexstream_ << access_point->first[2] << access_point->first[3];
     hexstream_ >> colorr;
     hexstream_.clear(); // clear error flags
-    hexstream_ << access_point->first[8] << access_point->first[9];
+    hexstream_ << access_point->first[4] << access_point->first[5];
     hexstream_ >> colorg;
     hexstream_.clear(); // clear error flags
-    hexstream_ << access_point->first[10] << access_point->first[11];
+    hexstream_ << access_point->first[6] << access_point->first[7];
     hexstream_ >> colorb;
     hexstream_.clear(); // clear error flags
     ROS_DEBUG_STREAM("colors: " << colorr << " " << colorg << " " << colorb);
