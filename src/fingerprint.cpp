@@ -47,10 +47,16 @@ int main(int argc, char **argv)
   std::string interface;
   private_node_handle_.param<std::string>("interface", interface, "wlan0");
 
+  /* Channels are hard-coded for now. */
+  std::vector<int> channels;
+  channels.push_back(1);
+  channels.push_back(6);
+  channels.push_back(11);
+
   /* Create topic, scanning object, and start fingerprinting. */
   ros::Publisher pub_fingerprint = node.advertise<wifi_scan::Fingerprint>(
       topic_name, 10);
-  WifiScan wifiscan(interface);
+  WifiScan wifiscan(channels, interface);
   while (node.ok())
   {
     try
