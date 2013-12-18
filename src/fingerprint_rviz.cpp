@@ -96,6 +96,10 @@ public:
 
   void fingerprint_rvizCallback(
                                 const wifi_scan::Fingerprint &fingerprint);
+  /**
+   * WARNING: depricated
+   * @param odom
+   */
   void odom_tfCallback(
                        const nav_msgs::Odometry &odom);
 };
@@ -252,9 +256,9 @@ int main(int argc, char **argv)
       topic_name, 1000,
       &FingerprintRviz::fingerprint_rvizCallback,
       &fingerprint_rviz);
-  ros::Subscriber sub_odom = node.subscribe("/p3dx/odom", 1000,
-                                            &FingerprintRviz::odom_tfCallback,
-                                            &fingerprint_rviz);
+//  ros::Subscriber sub_odom = node.subscribe("/p3dx/odom", 1000,
+//                                            &FingerprintRviz::odom_tfCallback,
+//                                            &fingerprint_rviz);
 
   ros::spin();
 }
