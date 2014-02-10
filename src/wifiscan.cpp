@@ -331,7 +331,10 @@ WifiScan::~WifiScan()
 void WifiScan::createFingerprint(ros::Publisher *pub)
 {
   wireless_scan_head scan_context;
-  ROS_DEBUG_STREAM("uid: " << geteuid());
+
+  if (geteuid() != 0)
+    ROS_FATAL_STREAM("uid: " << geteuid());
+
   if (scan_channels(&scan_context) < 0)
     throw WIFISCAN_ERROR_IN_IW_SCAN;
   if (scan_context.result != 0)
